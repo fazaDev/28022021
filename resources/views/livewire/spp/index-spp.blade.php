@@ -82,9 +82,7 @@
                                         <i class="mdi mdi-printer"></i>
                                     </a>
                                     <button
-                                        wire:click="$emitTo('siswa.update-siswa', 'updateSiswa', {{ $item->id }})"
-                                        data-toggle="modal"
-                                        data-target="#modal_update_siswa"
+                                        wire:click="edit('{{ $item->id }}')"
                                         class="btn btn-xs btn-md btn-info btn-icon waves-effect waves-light"
                                     >
                                     <i class="mdi mdi-pencil"></i>
@@ -110,7 +108,13 @@
             <div class="card-box">
                 <h4 class="mt-0 header-title">Form Pembayaran SPP</h4>
                 <hr>
-                <form wire:submit.prevent="store">
+                <form
+                    @if($isEdit)
+                        wire:submit.prevent="update()"
+                    @else
+                        wire:submit.prevent="store"
+                    @endif
+                >
 
                     <div class="form-group">
                         <label for="">Siswa</label>
@@ -153,7 +157,10 @@
                         @error($jumlah_bayar) <small class="text-danger">{{$message}}</small>@enderror
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-block btn-primary">Bayar</button>
+                        <button type="submit" class="btn btn-block btn-primary">{{$isEdit ? 'Update' : 'Bayar'}}</button>
+                        @if($isEdit)
+                        <button wire:click="batal()" class="btn btn-block btn-danger">Batalkan</button>
+                        @endif
                     </div>
                 </form>
             </div>

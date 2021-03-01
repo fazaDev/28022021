@@ -17,6 +17,8 @@ class IndexSpp extends Component
 
     public $siswa_id, $uuid, $spp_bulan, $jumlah_bayar, $tanggal_bayar, $created_by, $sppId;
 
+    public $isEdit = false;
+
     public $search;
 
     public function updatingSearch()
@@ -32,6 +34,7 @@ class IndexSpp extends Component
             'pembayaran' => DB::table('spp')
                 ->leftJoin('siswa', 'siswa.id', '=', 'spp.siswa_id')
                 ->where('nama', 'like', $searchSiswa)
+                ->select('spp.*', 'siswa.nama', 'siswa.ind')
                 ->orderBy('spp.tanggal_bayar', 'DESC')
                 ->paginate(5),
             'siswa' => Siswa::get()
@@ -69,5 +72,56 @@ class IndexSpp extends Component
         ]);
 
         $this->clearForm();
+    }
+
+    public function edit($id)
+    {
+        $this->isEdit = true;
+
+        $spp = Spp::findOrFail($id);
+
+        // $spp = DB::table('spp')
+        //     ->leftJoin('siswa', 'siswa.id', '=', 'spp.siswa_id')
+        //     ->where('spp.id', $id)
+        //     ->first();
+
+        // dd($spp);
+
+        $this->sppId = $id;
+        $this->siswa_id = $spp->siswa_id;
+        $this->spp_bulan = $spp->spp_bulan;
+        $this->tanggal_bayar = $spp->tanggal_bayar;
+        $this->jumlah_bayar = $spp->jumlah_bayar;
+    }
+
+    public function update()
+    {
+        $this->validate([
+            'siswa_id' => 'required',
+            'spp_bulan' => 'required',
+            // 'jumlah_bayar' => 'required|not_regex:/^Rp.\s\d{1,3}(\.\d{3})*?$/',
+            'jumlah_bayar' => 'required',
+            'tanggal_bayar' => 'required'
+        ]);
+
+        $spp = Spp::findOrFail($this->sppId);
+
+        $updateData = [
+            // 'siswa_id' => $this->siswa_id,
+            'spp_bulan' => $this->spp_bulan,
+            'jumlah_bayar' => $this->jumlah_bayar,
+            'tanggal_bayar' => $this->tanggal_bayar,
+        ];
+
+        $spp->update($updateData);
+
+        $this->clearForm();
+        $this->isEdit = false;
+    }
+
+    public function batal()
+    {
+        $this->clearForm();
+        $this->isEdit = false;
     }
 }
