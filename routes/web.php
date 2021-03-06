@@ -6,6 +6,7 @@ use App\Http\Livewire\Guru\IndexGuru;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Siswa\IndexSiswa;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\HistoryPembayaranController;
 
@@ -20,10 +21,9 @@ use App\Http\Controllers\HistoryPembayaranController;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
-
+// Route::get('/', function () {
+//     return view('landing');
+// });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -37,3 +37,7 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/sync', [UserController::class, 'sycn_user_siswa'])->name('users.sync');
 
 Route::get('user/ganti-password/{id}', [UserController::class, 'reset_password']);
+Route::resource('/halaman', HalamanController::class);
+
+Route::get('/', [App\Http\Controllers\LandingPageController::class, 'index'])->name('frontend.index');
+Route::get('/{slug}', [App\Http\Controllers\LandingPageController::class, 'show'])->name('frontend.detail');

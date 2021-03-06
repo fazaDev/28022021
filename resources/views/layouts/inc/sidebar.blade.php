@@ -95,6 +95,14 @@
                         <span> User </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('halaman.index') }}">
+                        <i class="far fa-credit-card"></i>
+                        <span> Halaman</span>
+                    </a>
+                </li>
+
                 @endif
                 @if(Auth::user()->role == 'user')
                 <li>

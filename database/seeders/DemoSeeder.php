@@ -26,35 +26,35 @@ class DemoSeeder extends Seeder
             'created_at' => now()
         ]);
 
-        User::create([
-            'name' => 'Serly Fadilla',
-            'email' => 'pt-001@paudteratai.com',
-            'password' => bcrypt('123456'),
-            'role' => 'user',
-            'created_at' => now()
-        ]);
+        // User::create([
+        //     'name' => 'Serly Fadilla',
+        //     'email' => 'pt-001@paudteratai.com',
+        //     'password' => bcrypt('123456'),
+        //     'role' => 'user',
+        //     'created_at' => now()
+        // ]);
 
-        Siswa::create([
-            'user_id' => 2,
-            'ind' => 'PT-001',
-            'nama' => 'Serly Fadilla',
-            'tanggal_lahir' => now(),
-            'tempat_lahir' => 'Batang Hari',
-            'agama' => 'Islam',
-            'jenis_kelamin' => 'P',
-            'alamat' => 'Jl. Sunda Kelapa RT. 15 Ds. Bukit Harapan',
-            'orang_tua' => 'Alamsyah D'
-        ]);
+        // Siswa::create([
+        //     'user_id' => 2,
+        //     'ind' => 'PT-001',
+        //     'nama' => 'Serly Fadilla',
+        //     'tanggal_lahir' => now(),
+        //     'tempat_lahir' => 'Batang Hari',
+        //     'agama' => 'Islam',
+        //     'jenis_kelamin' => 'P',
+        //     'alamat' => 'Jl. Sunda Kelapa RT. 15 Ds. Bukit Harapan',
+        //     'orang_tua' => 'Alamsyah D'
+        // ]);
 
 
-        Guru::create([
-            'nuptk' => '1982739293001',
-            'nama' => 'Sri Swarni',
-            'tanggal_lahir' => now(),
-            'tempat_lahir' => 'Batang Hari',
-            'agama' => 'Islam',
-            'jenis_kelamin' => 'P',
-            'alamat' => 'Jl. Sunda Kelapa RT. 15 Ds. Bukit Harapan'
-        ]);
+        // Guru::create([
+        //     'nuptk' => '1982739293001',
+        //     'nama' => 'Sri Swarni',
+        //     'tanggal_lahir' => now(),
+        //     'tempat_lahir' => 'Batang Hari',
+        //     'agama' => 'Islam',
+        //     'jenis_kelamin' => 'P',
+        //     'alamat' => 'Jl. Sunda Kelapa RT. 15 Ds. Bukit Harapan'
+        // ]);
     }
 }

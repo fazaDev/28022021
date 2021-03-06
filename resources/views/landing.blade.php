@@ -49,6 +49,13 @@
                             <a href="/" class="nav-link">Home</a>
                         </li>
 
+                        @foreach($halaman as $halaman)
+                        <li class="nav-item">
+                            {{-- <a href="{{ route('frontend.detail', $halaman->slug) }}" class="nav-link">{{ $halaman->judul }}</a> --}}
+                            <a href="#{{ $halaman->slug }}" class="nav-link">{{ $halaman->judul }}</a>
+                        </li>
+                        @endforeach
+
 
                         <li class="nav-item">
                             <a href="{{ route('login') }}" class="nav-link">Login</a>
@@ -91,6 +98,40 @@
             </div>
         </section>
         <!-- home end -->
+
+        @foreach($section as $item)
+        <!-- clients start -->
+        <section class="section bg-light" id="{{ $item->slug }}">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="title text-center mb-4">
+                            <h6 class="text-primary small-title">{{ $item->judul }}</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="testi-box p-4 bg-white mt-4 text-center">
+                            <p class="text-muted mb-4">{!! $item->deskripsi !!}</p>
+
+                            {{-- <p class="text-muted mb-1"> - Admin</p> --}}
+                            <h5 class="font-18">{{ $item->date_formatted }}</h5>
+
+                            <div class="testi-icon">
+                                <i class="mdi mdi-format-quote-open display-2"></i>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+        </section>
+        <!-- clients end -->
+        @endforeach
 
         <!-- footer start -->
         <footer class="footer bg-dark">
