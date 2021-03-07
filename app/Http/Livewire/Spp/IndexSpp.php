@@ -21,6 +21,8 @@ class IndexSpp extends Component
 
     public $search;
 
+    public $filterBulan;
+
     public function updatingSearch()
     {
         $this->resetPage();
@@ -28,15 +30,27 @@ class IndexSpp extends Component
 
     public function render()
     {
-        $searchSiswa = '%' . $this->search . '%';
+        $pembayaran = Spp::whereHas('siswa', function ($q) {
+            $searchSiswa = '%' . $this->search . '%';
+            $bulan = $this->filterBulan;
+            $q->where('nama', 'like', $searchSiswa)
+                ->where('spp_bulan', '=', $bulan);
+        })->paginate(5);
+        // dd($pembayaran);
+
+        // return view('livewire.spp.index-spp', [
+        //     'pembayaran' => DB::table('spp')
+        //         ->leftJoin('siswa', 'siswa.id', '=', 'spp.siswa_id')
+        //         ->where('nama', 'like', $searchSiswa)
+        //         ->orWhere('spp_bulan', '=', $this->filterBulan)
+        //         ->select('spp.*', 'siswa.nama', 'siswa.ind')
+        //         ->orderBy('spp.tanggal_bayar', 'DESC')
+        //         ->paginate(5),
+        //     'siswa' => Siswa::get()
+        // ]);
 
         return view('livewire.spp.index-spp', [
-            'pembayaran' => DB::table('spp')
-                ->leftJoin('siswa', 'siswa.id', '=', 'spp.siswa_id')
-                ->where('nama', 'like', $searchSiswa)
-                ->select('spp.*', 'siswa.nama', 'siswa.ind')
-                ->orderBy('spp.tanggal_bayar', 'DESC')
-                ->paginate(5),
+            'pembayaran' => $pembayaran,
             'siswa' => Siswa::get()
         ]);
     }

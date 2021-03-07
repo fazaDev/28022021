@@ -15,6 +15,6 @@ class Halaman extends Model
 
     public function getDateFormattedAttribute()
     {
-        return date('d-m-Y', strtotime($this->tanggal_lahir));
+        return date('d-m-Y', strtotime($this->created_at));
     }
 }

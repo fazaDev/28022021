@@ -15,7 +15,8 @@ class Spp extends Model
 
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class, 'siswa_id', 'id', 'ind');
+        return $this->belongsTo(Siswa::class);
+        // return $this->belongsTo(Siswa::class, 'siswa_id', 'id', 'ind');
     }
 
     public function getJbAttribute()

@@ -37,17 +37,27 @@
 
             <div class="card-box">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <h4 class="mt-0 header-title">Data Pembayaran SPP</h4>
                         <hr>
                     </div><!-- end col -->
-                    {{-- <div class="col-md-2">
-                        <select wire:model="status" id="" class="form-control">
-                            <option value="">-- Status Siswa --</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="nonaktif">Tidak Aktif</option>
+                    <div class="col-md-4">
+                        <select wire:model="filterBulan" id="" class="form-control">
+                            <option value="">-- Filter Bulan Bayar --</option>
+                            <option value="Januari">Januari</option>
+                            <option value="Februari">Februari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="col-md-4">
                         <input type="text"  class="form-control mb-2" placeholder="Cari siswa ..." wire:model="search" />
                     </div>
@@ -69,8 +79,8 @@
                             @forelse ($pembayaran as $index => $item)
                             <tr>
                                 <td>{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->index + 1 }}</td>
-                                <td>{{ $item->ind }}</td>
-                                <td>{{ $item->nama }}</td>
+                                <td>{{ $item->siswa->ind }}</td>
+                                <td>{{ $item->siswa->nama }}</td>
                                 <td>{{ $item->spp_bulan }}</td>
                                 <td>{{ date('d M Y', strtotime($item->tanggal_bayar)) }}</td>
                                 <td>{{ number_format($item->jumlah_bayar, 0, ',', '.' )}}</td>
